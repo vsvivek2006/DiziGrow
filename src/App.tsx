@@ -12,6 +12,7 @@ import Contact from './pages/Contact';
 import Terms from './pages/Terms'; 
 import OnboardingAgreement from './pages/OnboardingAgreement'; 
 import Privacy from './pages/Privacy';
+import FAQ from './FAQ';
 
 
 function App() {
@@ -30,6 +31,8 @@ function App() {
             <Route path="/onboarding-agreement" element={<OnboardingAgreement />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="/privacy" element={<Privacy />} />
+
+            <Route path="FAQ" element={<FAQ/>}></Route>
             
           </Routes>
         </main>
