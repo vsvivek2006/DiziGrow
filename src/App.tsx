@@ -13,6 +13,7 @@ import Terms from './pages/Terms';
 import OnboardingAgreement from './pages/OnboardingAgreement'; 
 import Privacy from './pages/Privacy';
 import FAQ from './FAQ';
+import NotFound from './pages/NotFound';
 
 
 function App() {
@@ -33,6 +34,8 @@ function App() {
             <Route path="/privacy" element={<Privacy />} />
 
             <Route path="FAQ" element={<FAQ/>}></Route>
+            <Route path="*" element={<NotFound />} />
+          
             
           </Routes>
         </main>
