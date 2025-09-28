@@ -1,6 +1,14 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Search, Home, ArrowLeft, HelpCircle, Phone, MessageCircle } from "lucide-react";
+import { Helmet } from "react-helmet";
+
+<Helmet>
+  <meta name="title" content="404 - Page Not Found - DiziGrow" />
+  <meta name="description" content="Oops! The page you're looking for doesn't exist. Go back to explore our services or homepage." />
+  <meta name="robots" content="noindex, nofollow" />
+</Helmet>
+
 
 const NotFound: React.FC = () => {
   const navigate = useNavigate();
