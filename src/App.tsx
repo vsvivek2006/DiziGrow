@@ -9,6 +9,10 @@ import Services from './pages/Services';
 import Portfolio from './pages/Portfolio';
 import Pricing from './pages/Pricing';
 import Contact from './pages/Contact';
+import Terms from './pages/Terms'; 
+import OnboardingAgreement from './pages/OnboardingAgreement'; 
+import Privacy from './pages/Privacy';
+
 
 function App() {
   return (
@@ -23,6 +27,10 @@ function App() {
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/onboarding-agreement" element={<OnboardingAgreement />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/privacy" element={<Privacy />} />
+            
           </Routes>
         </main>
         <Footer />
