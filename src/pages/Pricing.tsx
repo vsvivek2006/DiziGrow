@@ -1,5 +1,6 @@
 import React from 'react';
 import { Check, Star, Zap } from 'lucide-react';
+import { Helmet } from 'react-helmet';
 
 const Pricing = () => {
   const individualServices = [
@@ -83,8 +84,53 @@ const Pricing = () => {
     { name: 'Security Package', price: '₹3,999', description: 'SSL, security monitoring, and backup' },
   ];
 
-  return (
+return (
     <div>
+      {/* ✅ SEO Integration */}
+      <Helmet>
+        <title>Pricing Plans | DiziGrow – Startup, Growth & Enterprise Packages</title>
+        <meta
+          name="description"
+          content="Explore DiziGrow's transparent pricing for startups, growth, and enterprise packages. Choose the perfect plan for logo design, web development, SEO, digital marketing, and more."
+        />
+        <meta
+          name="keywords"
+          content="DiziGrow pricing, logo design price, WordPress website cost, Shopify store pricing, SEO services cost, digital marketing packages, website hosting, custom packages"
+        />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://dizigrow.com/pricing" />
+
+        {/* Open Graph */}
+        <meta property="og:title" content="Pricing Plans | DiziGrow – Startup, Growth & Enterprise Packages" />
+        <meta property="og:description" content="Transparent pricing for startups, growth, and enterprise packages. Get the best digital services for your business." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://dizigrow.com/pricing" />
+        <meta property="og:image" content="https://dizigrow.com/og-image-pricing.jpg" />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Pricing Plans | DiziGrow – Startup, Growth & Enterprise Packages" />
+        <meta name="twitter:description" content="Transparent pricing for startups, growth, and enterprise packages. Get the best digital services for your business." />
+        <meta name="twitter:image" content="https://dizigrow.com/og-image-pricing.jpg" />
+
+        {/* JSON-LD Structured Data */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Product",
+            "name": "DiziGrow Packages & Services",
+            "brand": "DiziGrow",
+            "offers": packages.map(pkg => ({
+              "@type": "Offer",
+              "name": pkg.name,
+              "price": pkg.price.replace(/₹/g, ''),
+              "priceCurrency": "INR",
+              "url": `https://wa.me/919521281509?text=${encodeURIComponent(pkg.whatsappText)}`,
+              "description": pkg.description
+            }))
+          })}
+        </script>
+      </Helmet>
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-purple-900 via-purple-800 to-purple-600 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

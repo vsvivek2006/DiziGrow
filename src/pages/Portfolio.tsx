@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ExternalLink, Filter } from 'lucide-react';
+import { Helmet } from 'react-helmet';
 
 const Portfolio = () => {
   const [activeFilter, setActiveFilter] = useState('All');
@@ -94,8 +95,53 @@ const Portfolio = () => {
     ? projects 
     : projects.filter(project => project.category === activeFilter);
 
-  return (
+    return (
     <div>
+      {/* ✅ SEO Integration */}
+      <Helmet>
+        <title>Portfolio | DiziGrow – Branding, Web, E-commerce & Digital Marketing</title>
+        <meta
+          name="description"
+          content="Explore DiziGrow's portfolio showcasing branding, web development, e-commerce, and digital marketing projects. See how we help businesses grow."
+        />
+        <meta
+          name="keywords"
+          content="DiziGrow portfolio, digital marketing Jaipur, SEO projects, web design Jaipur, branding projects, e-commerce development, website redesign, Shopify store, social media campaigns"
+        />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://dizigrow.com/portfolio" />
+
+        {/* Open Graph */}
+        <meta property="og:title" content="Portfolio | DiziGrow – Branding, Web, E-commerce & Digital Marketing" />
+        <meta property="og:description" content="Check out our portfolio of successful branding, web development, e-commerce, and digital marketing projects." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://dizigrow.com/portfolio" />
+        <meta property="og:image" content="https://dizigrow.com/og-image.jpg" />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Portfolio | DiziGrow – Branding, Web, E-commerce & Digital Marketing" />
+        <meta name="twitter:description" content="Explore our portfolio showcasing successful branding, web development, e-commerce, and digital marketing projects." />
+        <meta name="twitter:image" content="https://dizigrow.com/og-image.jpg" />
+
+        {/* JSON-LD Structured Data */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            "name": "DiziGrow Portfolio",
+            "url": "https://dizigrow.com/portfolio",
+            "numberOfItems": projects.length,
+            "itemListElement": projects.map((project, index) => ({
+              "@type": "ListItem",
+              "position": index + 1,
+              "url": `https://dizigrow.com/portfolio#project-${project.id}`,
+              "name": project.title,
+              "description": project.description
+            }))
+          })}
+        </script>
+      </Helmet>
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-purple-900 via-purple-800 to-purple-600 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

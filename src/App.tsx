@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import WhatsAppFloat from './components/WhatsAppFloat';
@@ -15,10 +16,23 @@ import Privacy from './pages/Privacy';
 import FAQ from './FAQ';
 import NotFound from './pages/NotFound';
 
-
 function App() {
   return (
     <Router>
+      {/* Global SEO + GA4 */}
+      <Helmet>
+        {/* GA4 Tracking */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-M92TJDJ055"></script>
+        <script>
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-M92TJDJ055');
+          `}
+        </script>
+      </Helmet>
+
       <div className="min-h-screen bg-gray-50">
         <Header />
         <main>
@@ -32,11 +46,8 @@ function App() {
             <Route path="/onboarding-agreement" element={<OnboardingAgreement />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="/privacy" element={<Privacy />} />
-
-            <Route path="FAQ" element={<FAQ/>}></Route>
+            <Route path="/faq" element={<FAQ />} />
             <Route path="*" element={<NotFound />} />
-          
-            
           </Routes>
         </main>
         <Footer />

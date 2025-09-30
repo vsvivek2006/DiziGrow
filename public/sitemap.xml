@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
   <!-- Home -->
   <url>
     <loc>https://dizigrow.com/</loc>
     <lastmod>2025-09-28</lastmod>
     <priority>1.0</priority>
-    <changefreq>weekly</changefreq>
+    <changefreq>daily</changefreq>
   </url>
 
   <!-- About -->
@@ -13,7 +14,7 @@
     <loc>https://dizigrow.com/about</loc>
     <lastmod>2025-09-28</lastmod>
     <priority>0.8</priority>
-    <changefreq>monthly</changefreq>
+    <changefreq>daily</changefreq>
   </url>
 
   <!-- Services -->
@@ -21,7 +22,7 @@
     <loc>https://dizigrow.com/services</loc>
     <lastmod>2025-09-28</lastmod>
     <priority>0.8</priority>
-    <changefreq>monthly</changefreq>
+    <changefreq>daily</changefreq>
   </url>
 
   <!-- Pricing -->
@@ -29,15 +30,15 @@
     <loc>https://dizigrow.com/pricing</loc>
     <lastmod>2025-09-28</lastmod>
     <priority>0.8</priority>
-    <changefreq>monthly</changefreq>
+    <changefreq>weekly</changefreq>
   </url>
 
   <!-- Portfolio -->
   <url>
     <loc>https://dizigrow.com/portfolio</loc>
     <lastmod>2025-09-28</lastmod>
-    <priority>0.6</priority>
-    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <changefreq>weekly</changefreq>
   </url>
 
   <!-- Contact -->
@@ -67,11 +68,13 @@
     <priority>0.7</priority>
     <changefreq>yearly</changefreq>
   </url>
+
+  <!-- FAQ -->
   <url>
     <loc>https://dizigrow.com/faq</loc>
     <lastmod>2025-09-28</lastmod>
     <priority>0.6</priority>
-    <changefreq>yearly</changefreq>
+    <changefreq>weekly</changefreq>
   </url>
 
 </urlset>

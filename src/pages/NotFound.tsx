@@ -3,18 +3,46 @@ import { Link, useNavigate } from "react-router-dom";
 import { Search, Home, ArrowLeft, HelpCircle, Phone, MessageCircle } from "lucide-react";
 import { Helmet } from "react-helmet";
 
-<Helmet>
-  <meta name="title" content="404 - Page Not Found - DiziGrow" />
-  <meta name="description" content="Oops! The page you're looking for doesn't exist. Go back to explore our services or homepage." />
-  <meta name="robots" content="noindex, nofollow" />
-</Helmet>
-
-
 const NotFound: React.FC = () => {
   const navigate = useNavigate();
 
   return (
     <div>
+      {/* ✅ SEO Component */}
+      <Helmet>
+        <title>404 - Page Not Found | DiziGrow</title>
+        <meta
+          name="description"
+          content="Oops! The page you're looking for doesn't exist. Explore DiziGrow services or go back to the homepage."
+        />
+        <meta name="robots" content="noindex, nofollow" />
+        <link rel="canonical" href="https://dizigrow.com/404" />
+
+        {/* Open Graph */}
+        <meta property="og:title" content="404 - Page Not Found | DiziGrow" />
+        <meta property="og:description" content="Oops! The page you're looking for doesn't exist. Explore our services or go back to homepage." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://dizigrow.com/404" />
+        <meta property="og:image" content="https://dizigrow.com/og-image.jpg" />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="404 - Page Not Found | DiziGrow" />
+        <meta name="twitter:description" content="The page you are looking for is missing. Go back or explore DiziGrow services." />
+        <meta name="twitter:image" content="https://dizigrow.com/og-image.jpg" />
+
+        {/* JSON-LD */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": "404 - Page Not Found",
+            "url": "https://dizigrow.com/404",
+            "description": "Oops! The page you're looking for doesn't exist. Explore DiziGrow services or homepage."
+          })}
+        </script>
+      </Helmet>
+
       {/* Hero */}
       <section className="bg-gradient-to-br from-purple-900 via-purple-800 to-purple-600 text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -52,7 +80,7 @@ const NotFound: React.FC = () => {
             </Link>
           </div>
 
-          {/* Optional: quick “search-like” hint bar (no actual search wiring) */}
+          {/* Optional: search hint */}
           <div className="mt-8 max-w-2xl mx-auto">
             <div className="flex items-center gap-2 rounded-xl border border-gray-200 bg-white px-4 py-3 shadow-sm">
               <Search className="h-5 w-5 text-gray-400" />

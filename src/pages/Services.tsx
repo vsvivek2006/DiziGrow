@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import { 
   Palette, 
   TrendingUp, 
@@ -135,8 +136,65 @@ const Services = () => {
 
   const whatsappUrl = 'https://wa.me/919521281509?text=Hello%20DiziGrow,%20I%20want%20to%20discuss';
 
-  return (
+ return (
     <div>
+      {/* ✅ SEO Integration */}
+      <Helmet>
+        <title>Digital Services | DiziGrow – Branding, Web Development & Marketing Solutions</title>
+        <meta
+          name="description"
+          content="Discover DiziGrow's comprehensive digital services including branding, web development, e-commerce, and digital marketing solutions tailored to grow your business."
+        />
+        <meta
+          name="keywords"
+          content="DiziGrow services, branding services Jaipur, web development, SEO services, digital marketing, e-commerce development, logo design, WordPress website, Shopify store, mobile app development"
+        />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://dizigrow.com/services" />
+
+        {/* Open Graph */}
+        <meta property="og:title" content="Digital Services | DiziGrow – Branding, Web Development & Marketing Solutions" />
+        <meta property="og:description" content="Explore DiziGrow's digital services to boost your business growth, from branding and web development to e-commerce and digital marketing solutions." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://dizigrow.com/services" />
+        <meta property="og:image" content="https://dizigrow.com/og-image-services.jpg" />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Digital Services | DiziGrow – Branding, Web Development & Marketing Solutions" />
+        <meta name="twitter:description" content="Explore DiziGrow's digital services to boost your business growth, from branding and web development to e-commerce and digital marketing solutions." />
+        <meta name="twitter:image" content="https://dizigrow.com/og-image-services.jpg" />
+
+        {/* JSON-LD Structured Data */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "provider": {
+              "@type": "Organization",
+              "name": "DiziGrow",
+              "url": "https://dizigrow.com"
+            },
+            "areaServed": "IN",
+            "hasOfferCatalog": {
+              "@type": "OfferCatalog",
+              "name": "Digital Services",
+              "itemListElement": serviceCategories.map((category) => ({
+                "@type": "OfferCatalog",
+                "name": category.title,
+                "itemListElement": category.services.map((service) => ({
+                  "@type": "Offer",
+                  "name": service.name,
+                  "description": service.description,
+                  "price": service.price === 'Contact Us' ? undefined : service.price.replace(/₹/g, ''),
+                  "priceCurrency": "INR",
+                  "url": `${whatsappUrl}%20${encodeURIComponent(service.name)}`
+                }))
+              }))
+            }
+          })}
+        </script>
+      </Helmet>
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-purple-900 via-purple-800 to-purple-600 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

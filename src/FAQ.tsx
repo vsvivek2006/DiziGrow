@@ -1,5 +1,6 @@
 // src/pages/FAQ.tsx
 import React from "react";
+import { Helmet } from "react-helmet";
 
 type QA = { q: string; a: string };
 
@@ -48,19 +49,89 @@ const FAQ: React.FC = () => {
   ];
 
   return (
-    <section className="max-w-5xl mx-auto px-4 py-12">
-      <h1 className="text-3xl font-bold mb-8">Frequently Asked Questions</h1>
-      <div className="space-y-6">
-        {faqs.map((item, i) => (
-          <details key={i} className="group border rounded-xl p-4 bg-white shadow-md">
-            <summary className="cursor-pointer font-semibold text-gray-900">
-              {item.q}
-            </summary>
-            <p className="mt-2 text-gray-700">{item.a}</p>
-          </details>
-        ))}
-      </div>
-    </section>
+    <div className="bg-gray-50 min-h-screen">
+      <Helmet>
+        {/* Basic Meta */}
+        <title>FAQ | DiziGrow - Digital Marketing & Web Development in Jaipur, India</title>
+        <meta
+          name="description"
+          content="Frequently asked questions about digital marketing, web development, branding, SEO, logo design, and website design. Get answers from DiziGrow, Jaipur, India."
+        />
+        <meta
+          name="keywords"
+          content="digital marketing, web development, branding, SEO, logo design, website design, Jaipur, India"
+        />
+        <link rel="canonical" href="https://dizigrow.com/faq" />
+
+        {/* Robots */}
+        <meta name="robots" content="index, follow" />
+
+        {/* Author & Publisher */}
+        <meta name="author" content="DiziGrow" />
+        <meta name="publisher" content="DiziGrow" />
+
+        {/* Language */}
+        <html lang="en" />
+
+        {/* Structured Data - FAQPage */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: faqs.map((faq) => ({
+              "@type": "Question",
+              name: faq.q,
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: faq.a,
+              },
+            })),
+          })}
+        </script>
+      </Helmet>
+
+      {/* Hero Section */}
+      <section className="bg-gradient-to-r from-purple-700 to-purple-900 text-white py-16 text-center">
+        <h1 className="text-4xl md:text-5xl font-bold mb-4">Frequently Asked Questions</h1>
+        <p className="text-lg md:text-xl max-w-2xl mx-auto">
+          Answers to common questions about digital marketing, web development, branding, SEO, and more.
+        </p>
+      </section>
+
+      {/* FAQ Accordion */}
+      <section className="max-w-5xl mx-auto px-4 py-12">
+        <div className="space-y-4">
+          {faqs.map((item, i) => (
+            <details
+              key={i}
+              className="group border rounded-xl bg-white shadow hover:shadow-lg transition-all duration-200 p-5"
+            >
+              <summary className="cursor-pointer font-semibold text-gray-900 text-lg md:text-xl flex items-center justify-between">
+                {item.q}
+                <span className="transition-transform group-open:rotate-45 text-purple-600 font-bold">+</span>
+              </summary>
+              <p className="mt-3 text-gray-700 text-base md:text-lg">{item.a}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="bg-purple-800 text-white py-16 text-center">
+        <h2 className="text-3xl md:text-4xl font-bold mb-4">Still Have Questions?</h2>
+        <p className="text-lg md:text-xl mb-6">
+          Contact us directly and our team will help you get the answers you need.
+        </p>
+        <a
+          href="https://wa.me/919521281509?text=Hello%20DiziGrow,%20I%20have%20a%20question"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-yellow-500 hover:bg-yellow-600 text-purple-900 font-semibold px-8 py-4 rounded-lg text-lg transition-all hover:scale-105 inline-block"
+        >
+          💬 Contact Us on WhatsApp
+        </a>
+      </section>
+    </div>
   );
 };
 

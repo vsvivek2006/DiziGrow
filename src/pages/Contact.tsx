@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Phone, Mail, MapPin, Clock, Send, MessageCircle, Instagram, Linkedin, Facebook } from 'lucide-react';
+import { Helmet } from 'react-helmet';
+
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -48,6 +50,10 @@ I would like to discuss my project with you.`;
     'Other'
   ];
 
+
+
+
+
   const contactInfo = [
     {
       icon: <Phone className="h-6 w-6" />,
@@ -77,6 +83,58 @@ I would like to discuss my project with you.`;
 
   return (
     <div>
+      {/* ✅ SEO Component */}
+      <Helmet>
+        <title>Contact DiziGrow | Digital Marketing, SEO & Web Development Jaipur</title>
+        <meta
+          name="description"
+          content="Contact DiziGrow, a leading digital marketing company in Jaipur. Reach us for SEO, web development, performance marketing, social media & graphics design services."
+        />
+        <meta
+          name="keywords"
+          content="Contact DiziGrow, digital marketing Jaipur, SEO company Jaipur, web development Jaipur, social media marketing Jaipur, graphics design Jaipur, performance marketing India"
+        />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://dizigrow.com/contact" />
+
+        {/* Open Graph */}
+        <meta property="og:title" content="Contact DiziGrow – SEO & Digital Marketing Company Jaipur" />
+        <meta property="og:description" content="Get in touch with DiziGrow – Jaipur’s top digital marketing agency for SEO, web development, social media, and branding services." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://dizigrow.com/contact" />
+        <meta property="og:image" content="https://dizigrow.com/og-image.jpg" />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Contact DiziGrow | Digital Marketing & SEO Jaipur" />
+        <meta name="twitter:description" content="Reach DiziGrow for top-notch digital marketing, web development, SEO, and social media management services in Jaipur, India." />
+        <meta name="twitter:image" content="https://dizigrow.com/og-image.jpg" />
+
+        {/* JSON-LD Structured Data */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "DiziGrow",
+            "url": "https://dizigrow.com",
+            "logo": "https://dizigrow.com/logo.png",
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "telephone": "+91 9521281509",
+              "contactType": "customer support",
+              "email": "info@dizigrow.com",
+              "areaServed": "IN",
+              "availableLanguage": "English"
+            },
+            "sameAs": [
+              "https://www.facebook.com/dizigrow",
+              "https://www.instagram.com/dizigrow",
+              "https://www.linkedin.com/company/dizigrow"
+            ]
+          })}
+        </script>
+      </Helmet>
+      
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-purple-900 via-purple-800 to-purple-600 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
