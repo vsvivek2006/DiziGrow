@@ -127,9 +127,9 @@ I would like to discuss my project with you.`;
               "availableLanguage": "English"
             },
             "sameAs": [
-              "https://www.facebook.com/dizigrow",
-              "https://www.instagram.com/dizigrow",
-              "https://www.linkedin.com/company/dizigrow"
+              "https://www.facebook.com/profile.php?id=61581763886467",
+              "https://www.instagram.com/dizi_grow/",
+              "https://www.linkedin.com/company/109423940/"
             ]
           })}
         </script>
@@ -320,19 +320,19 @@ I would like to discuss my project with you.`;
                     <MessageCircle className="h-6 w-6" />
                   </a>
                   <a
-                    href="#"
+                    href="https://www.instagram.com/dizi_grow/"
                     className="bg-pink-500 hover:bg-pink-600 text-white p-3 rounded-lg transition-colors"
                   >
                     <Instagram className="h-6 w-6" />
                   </a>
                   <a
-                    href="#"
+                    href="https://www.linkedin.com/company/109423940/"
                     className="bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-lg transition-colors"
                   >
                     <Linkedin className="h-6 w-6" />
                   </a>
                   <a
-                    href="#"
+                    href="https://www.facebook.com/profile.php?id=61581763886467"
                     className="bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-lg transition-colors"
                   >
                     <Facebook className="h-6 w-6" />
