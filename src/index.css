@@ -1,8 +1,9 @@
+/* ✅ @import MUST be at the top */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 
 @layer base {
   body {
@@ -48,7 +49,7 @@
   }
 }
 
-/* Custom scrollbar */
+/* Rest of your CSS remains same */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -66,12 +67,10 @@
   background: #4C1D95;
 }
 
-/* Smooth scrolling */
 html {
   scroll-behavior: smooth;
 }
 
-/* Focus states */
 button:focus,
 input:focus,
 textarea:focus,
@@ -80,13 +79,11 @@ select:focus {
   outline-offset: 2px;
 }
 
-/* Custom selection */
 ::selection {
   background-color: #6A0DAD;
   color: white;
 }
 
-/* Loading animation */
 .loading-spinner {
   animation: spin 1s linear infinite;
 }
