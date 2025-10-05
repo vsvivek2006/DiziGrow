@@ -15,7 +15,7 @@ import OnboardingAgreement from './pages/OnboardingAgreement';
 import Privacy from './pages/Privacy';
 import FAQ from './FAQ';
 import NotFound from './pages/NotFound';
-import Offer from './pages/offer';
+import Offer from './pages/Offer';
 
 function App() {
   return (
