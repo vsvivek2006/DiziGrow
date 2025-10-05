@@ -15,7 +15,7 @@ import OnboardingAgreement from './pages/OnboardingAgreement';
 import Privacy from './pages/Privacy';
 import FAQ from './FAQ';
 import NotFound from './pages/NotFound';
-import Offer from './pages/Offer';
+import Offer from './pages/offer';
 
 function App() {
   return (
@@ -51,6 +51,7 @@ function App() {
             <Route path="/terms" element={<Terms />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/faq" element={<FAQ />} />
+            
             <Route path="/offer" element={<Offer />} />
             
             {/* ✅ PAYMENT SUCCESS PAGE */}

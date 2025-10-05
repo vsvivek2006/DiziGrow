@@ -42,8 +42,8 @@ const Offer: React.FC = () => {
   const [isPaymentOpen, setIsPaymentOpen] = useState(false);
   const [isSuccessFormOpen, setIsSuccessFormOpen] = useState(false);
   const [selectedService, setSelectedService] = useState("");
-  const [timeLeft, setTimeLeft] = useState(60); // 1 minute timer
-  const [flashSaleTime, setFlashSaleTime] = useState(15); // 15 seconds flash sale
+  const [timeLeft, setTimeLeft] = useState(180); // 3 minutes timer
+  const [flashSaleTime, setFlashSaleTime] = useState(30); // 30 seconds flash sale
   const [isSpecialPrice, setIsSpecialPrice] = useState(true);
   const [isFlashSale, setIsFlashSale] = useState(true);
   const [hasFlashSaleOccurred, setHasFlashSaleOccurred] = useState(false);
@@ -69,10 +69,11 @@ const Offer: React.FC = () => {
 
   // ✅ FIXED: Environment variable use karo
   const RAZORPAY_KEY_ID = import.meta.env.VITE_RAZORPAY_KEY_ID;
+  const WHATSAPP_NUMBER = "9341436937";
 
   // Initialize timers from localStorage
   useEffect(() => {
-    const savedTime = localStorage.getItem('diwaliOfferTime');
+    const savedTime = localStorage.getItem('specialOfferTime');
     const savedFlashSale = localStorage.getItem('flashSaleOccurred');
     const savedOfferExpired = localStorage.getItem('offerExpired');
     
@@ -96,7 +97,7 @@ const Offer: React.FC = () => {
     }
   }, []);
 
-  // Main Timer Effect
+  // Main Timer Effect - 3 minutes
   useEffect(() => {
     if (timeLeft <= 0) {
       setOfferExpired(true);
@@ -108,7 +109,7 @@ const Offer: React.FC = () => {
     const timerId = setInterval(() => {
       setTimeLeft(prev => {
         const newTime = prev - 1;
-        localStorage.setItem('diwaliOfferTime', newTime.toString());
+        localStorage.setItem('specialOfferTime', newTime.toString());
         
         if (newTime <= 0) {
           setOfferExpired(true);
@@ -124,7 +125,7 @@ const Offer: React.FC = () => {
     return () => clearInterval(timerId);
   }, [timeLeft]);
 
-  // Flash Sale Timer - Only runs once per browser session
+  // Flash Sale Timer - 30 seconds with 20% discount
   useEffect(() => {
     if (flashSaleTime <= 0 || hasFlashSaleOccurred) {
       setIsFlashSale(false);
@@ -154,17 +155,7 @@ const Offer: React.FC = () => {
     return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
   };
 
-  // Normal prices (when offer expires)
-  const normalPrices = {
-    smo: 7999,
-    seo: 14999,
-    web: 18000,
-    ecommerce: 8999,
-    social: 3999,
-    google: 1999
-  };
-
-  // Price data with ₹1 GMB setup
+  // Updated Price Data with ₹1 Consultation
   const priceData = {
     smo: {
       special: 4999,
@@ -247,9 +238,9 @@ const Offer: React.FC = () => {
       gradient: "bg-gradient-to-r from-green-500 to-emerald-500"
     },
     google: {
-      special: 1,
+      special: 999,
       regular: 1999,
-      save: "₹1,998",
+      save: "₹1,000",
       name: "Google Business Setup",
       features: [
         "GOOGLE BUSINESS PAGE",
@@ -261,6 +252,22 @@ const Offer: React.FC = () => {
       ],
       icon: "🌐",
       gradient: "bg-gradient-to-r from-yellow-500 to-amber-500"
+    },
+    consultation: {
+      special: 1,
+      regular: 999,
+      save: "₹998",
+      name: "Expert Consultation",
+      features: [
+        "30-Minute Strategy Session",
+        "Digital Audit Report",
+        "Custom Growth Plan",
+        "Competitor Analysis",
+        "ROI Optimization Tips",
+        "Priority Support Access"
+      ],
+      icon: "💬",
+      gradient: "bg-gradient-to-r from-purple-500 to-pink-500"
     }
   };
 
@@ -285,10 +292,10 @@ const Offer: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    const whatsappMessage = `🪔 Diwali Offer Inquiry - DiziGrow 🪔\n\nName: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nService: ${formData.service}\nMessage: ${formData.message}`;
+    const whatsappMessage = `🎯 Expert Consultation Request - DiziGrow 🎯\n\nName: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nService: ${formData.service}\nMessage: ${formData.message}`;
     
     const encodedMessage = encodeURIComponent(whatsappMessage);
-    window.open(`https://wa.me/919341436937?text=${encodedMessage}`, '_blank');
+    window.open(`https://wa.me/91${WHATSAPP_NUMBER}?text=${encodedMessage}`, '_blank');
     
     setIsFormOpen(false);
     setFormData({ name: "", email: "", phone: "", service: "", message: "" });
@@ -297,10 +304,10 @@ const Offer: React.FC = () => {
   const handleSuccessSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    const whatsappMessage = `✅ Payment Success - DiziGrow 🪔\n\nPayment Details:\nName: ${successFormData.name}\nEmail: ${successFormData.email}\nUTR Number: ${successFormData.utr}\nService: ${successFormData.service}\nAmount Paid: ₹${successFormData.amount}\n\nPlease verify my payment and start the service!`;
+    const whatsappMessage = `✅ Payment Success - DiziGrow 🎯\n\nPayment Details:\nName: ${successFormData.name}\nEmail: ${successFormData.email}\nUTR Number: ${successFormData.utr}\nService: ${successFormData.service}\nAmount Paid: ₹${successFormData.amount}\n\nPlease verify my payment and start the service!`;
     
     const encodedMessage = encodeURIComponent(whatsappMessage);
-    window.open(`https://wa.me/919341436937?text=${encodedMessage}`, '_blank');
+    window.open(`https://wa.me/91${WHATSAPP_NUMBER}?text=${encodedMessage}`, '_blank');
     
     setIsSuccessFormOpen(false);
     setSuccessFormData({ name: "", email: "", utr: "", service: "", amount: "" });
@@ -316,24 +323,28 @@ const Offer: React.FC = () => {
   // Payment Functions
   const openPaymentModal = (serviceKey: keyof typeof priceData) => {
     const service = priceData[serviceKey];
+    const isConsultation = serviceKey === 'consultation';
     const isGoogle = serviceKey === 'google';
     
     setIsGoogleService(isGoogle);
     
     if (offerExpired) {
       // Normal prices after offer expires
-      setPaymentAmount(normalPrices[serviceKey]);
-      setOriginalAmount(normalPrices[serviceKey]);
+      setPaymentAmount(service.regular);
+      setOriginalAmount(service.regular);
+    } else if (isConsultation) {
+      setPaymentAmount(service.special); // ₹1 for Consultation
+      setOriginalAmount(service.regular);
     } else if (isGoogle) {
-      setPaymentAmount(service.special); // ₹1 for Google service
+      setPaymentAmount(service.special); // ₹999 for Google service
       setOriginalAmount(service.regular);
     } else {
       let originalPrice = isSpecialPrice ? service.special : service.regular;
       let discountedPrice = Math.floor(originalPrice * 0.9); // 10% discount
       
-      // Apply 90% discount for flash sale
+      // Apply 20% discount for flash sale
       if (isFlashSale) {
-        discountedPrice = Math.floor(originalPrice * 0.1); // 90% off
+        discountedPrice = Math.floor(originalPrice * 0.8); // 20% off
       }
       
       setPaymentAmount(discountedPrice);
@@ -358,12 +369,13 @@ const Offer: React.FC = () => {
       }
 
       const options = {
-        // ✅ FIXED: Environment variable directly use karo
-        key: import.meta.env.VITE_RAZORPAY_KEY_ID,
+        key: RAZORPAY_KEY_ID,
         amount: paymentAmount * 100,
         currency: 'INR',
-        name: 'DiziGrow - Diwali Special',
-        description: isGoogleService ? `Diwali Special - ${paymentService} for ₹1` : `Diwali Advance - ${paymentService}`,
+        name: 'DiziGrow - Special Offer',
+        description: isGoogleService ? `Special - ${paymentService} for ₹999` : 
+                    paymentService.includes('Consultation') ? `Expert Consultation - ${paymentService} for ₹1` :
+                    `Advance Booking - ${paymentService}`,
         image: '/logo.png',
         handler: function (response: any) {
           // Open success form after payment
@@ -388,7 +400,8 @@ const Offer: React.FC = () => {
         },
         notes: {
           service: paymentService,
-          type: isGoogleService ? 'Diwali Special ₹1' : 'Diwali Advance'
+          type: isGoogleService ? 'Google Business ₹999' : 
+                paymentService.includes('Consultation') ? 'Expert Consultation ₹1' : 'Advance Booking'
         },
         theme: {
           color: '#F59E0B'
@@ -406,13 +419,14 @@ const Offer: React.FC = () => {
 
   const getServicePrice = (serviceKey: keyof typeof priceData) => {
     if (offerExpired) {
-      return normalPrices[serviceKey];
+      return priceData[serviceKey].regular;
     }
     
-    if (serviceKey === 'google') return 1;
+    if (serviceKey === 'consultation') return 1;
+    if (serviceKey === 'google') return 999;
     
     if (isFlashSale) {
-      return Math.floor(priceData[serviceKey].special * 0.1); // 90% off during flash sale
+      return Math.floor(priceData[serviceKey].special * 0.8); // 20% off during flash sale
     }
     
     return isSpecialPrice ? priceData[serviceKey].special : priceData[serviceKey].regular;
@@ -420,12 +434,14 @@ const Offer: React.FC = () => {
 
   const getDiscountedPrice = (serviceKey: keyof typeof priceData) => {
     if (offerExpired) {
-      return normalPrices[serviceKey];
+      return priceData[serviceKey].regular;
     }
     
-    if (serviceKey === 'google') return 1;
+    if (serviceKey === 'consultation') return 1;
+    if (serviceKey === 'google') return 999;
+    
     const originalPrice = getServicePrice(serviceKey);
-    return Math.floor(originalPrice * 0.9);
+    return Math.floor(originalPrice * 0.9); // 10% advance discount
   };
 
   const servicesList = [
@@ -434,11 +450,12 @@ const Offer: React.FC = () => {
     { key: 'web' as const, label: 'Web Dev' },
     { key: 'ecommerce' as const, label: 'E-commerce' },
     { key: 'social' as const, label: 'Social' },
-    { key: 'google' as const, label: 'Google Business' }
+    { key: 'google' as const, label: 'Google Business' },
+    { key: 'consultation' as const, label: 'Consultation' }
   ];
 
-  // Diwali Sparkles Component
-  const DiwaliSparkles = () => (
+  // Sparkles Component
+  const SparklesEffect = () => (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
       {[...Array(10)].map((_, i) => (
         <div
@@ -458,11 +475,11 @@ const Offer: React.FC = () => {
 
   // Reset everything (for testing)
   const resetAll = () => {
-    localStorage.removeItem('diwaliOfferTime');
+    localStorage.removeItem('specialOfferTime');
     localStorage.removeItem('flashSaleOccurred');
     localStorage.removeItem('offerExpired');
-    setTimeLeft(60);
-    setFlashSaleTime(15);
+    setTimeLeft(180);
+    setFlashSaleTime(30);
     setIsSpecialPrice(true);
     setIsFlashSale(true);
     setHasFlashSaleOccurred(false);
@@ -471,10 +488,10 @@ const Offer: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-orange-50 via-amber-50 to-yellow-50" style={{ fontFamily: "'Haboro Serif', serif" }}>
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 via-purple-50 to-pink-50" style={{ fontFamily: "'Haboro Serif', serif" }}>
       <Helmet>
-        <title>Diwali Mega Offer - Google Business at ₹1 + 90% OFF Flash Sale | DiziGrow</title>
-        <meta name="description" content="Diwali Special: Get Google Business Setup for just ₹1 + 90% FLASH SALE on SMO, SEO, Web Development, E-commerce & more. Limited time!" />
+        <title>Special Offer - Expert Consultation at ₹1 + 20% OFF Flash Sale | DiziGrow</title>
+        <meta name="description" content="Special Offer: Get Expert Consultation for just ₹1 + 20% FLASH SALE on SMO, SEO, Web Development, E-commerce & more. Limited time!" />
         <link href="https://fonts.googleapis.com/css2?family=Haboro+Serif:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
       </Helmet>
 
@@ -490,10 +507,10 @@ const Offer: React.FC = () => {
 
       {/* Flash Sale Banner */}
       {isFlashSale && !offerExpired && (
-        <div className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-red-500 to-pink-500 text-white py-3 text-center animate-pulse">
+        <div className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-purple-500 to-pink-500 text-white py-3 text-center animate-pulse">
           <div className="flex items-center justify-center gap-3 text-sm md:text-base">
             <Zap className="h-4 w-4 md:h-5 md:w-5 animate-bounce" />
-            <span className="font-bold">FLASH SALE: 90% OFF - Ends in {flashSaleTime}s!</span>
+            <span className="font-bold">FLASH SALE: 20% OFF - Ends in {flashSaleTime}s!</span>
             <Zap className="h-4 w-4 md:h-5 md:w-5 animate-bounce" />
           </div>
         </div>
@@ -506,7 +523,7 @@ const Offer: React.FC = () => {
             <Clock className="h-4 w-4 animate-spin" />
             <div className="text-center">
               <div className="text-xs font-semibold">
-                {offerExpired ? '❌ OFFER EXPIRED' : isSpecialPrice ? '🪔 ENDS IN' : '⏰ ENDED'}
+                {offerExpired ? '❌ OFFER EXPIRED' : isSpecialPrice ? '⏰ ENDS IN' : '⏰ ENDED'}
               </div>
               <div className={`text-sm font-bold ${offerExpired && 'line-through'}`}>
                 {offerExpired ? '00:00' : formatTime(timeLeft)}
@@ -517,15 +534,15 @@ const Offer: React.FC = () => {
       </div>
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-orange-500 via-red-500 to-yellow-600 text-white pt-16 pb-12 md:py-20 overflow-hidden">
-        <DiwaliSparkles />
+      <section className="relative bg-gradient-to-r from-blue-500 via-purple-500 to-pink-600 text-white pt-16 pb-12 md:py-20 overflow-hidden">
+        <SparklesEffect />
         <div className="relative max-w-7xl mx-auto px-4 text-center">
           {!offerExpired && (
             <div className={`mb-4 md:mb-6 p-3 md:p-4 rounded-2xl ${isSpecialPrice ? 'bg-green-500/20 border border-green-300' : 'bg-red-500/20 border border-red-300'} backdrop-blur-sm`}>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-2 md:gap-4">
                 <div className="flex items-center gap-2">
                   <Clock className="h-4 w-4 md:h-6 md:w-6 animate-pulse" />
-                  <span className="text-sm md:text-lg font-bold">{isSpecialPrice ? '⏰ DIWALI OFFER ENDS IN:' : '❌ OFFER EXPIRED'}</span>
+                  <span className="text-sm md:text-lg font-bold">{isSpecialPrice ? '⏰ SPECIAL OFFER ENDS IN:' : '❌ OFFER EXPIRED'}</span>
                 </div>
                 <div className={`text-xl md:text-2xl font-bold ${isSpecialPrice ? 'text-yellow-300' : 'text-red-300'} font-mono`}>
                   {formatTime(timeLeft)}
@@ -535,14 +552,14 @@ const Offer: React.FC = () => {
           )}
 
           {isFlashSale && !offerExpired && (
-            <div className="bg-red-500 text-white px-4 py-2 rounded-full text-xs md:text-sm font-bold inline-block mb-4 md:mb-6 animate-pulse border-2 border-yellow-300">
-              ⚡ FLASH SALE: 90% OFF - {flashSaleTime}s LEFT!
+            <div className="bg-purple-500 text-white px-4 py-2 rounded-full text-xs md:text-sm font-bold inline-block mb-4 md:mb-6 animate-pulse border-2 border-yellow-300">
+              ⚡ FLASH SALE: 20% OFF - {flashSaleTime}s LEFT!
             </div>
           )}
 
           {!offerExpired && (
-            <div className="bg-yellow-400 text-orange-800 px-4 py-2 md:px-6 md:py-3 rounded-full text-xs md:text-sm font-bold inline-block mb-4 md:mb-6 animate-pulse border-2 border-orange-300">
-              🪔 Google Business at ₹1 Only! 🪔
+            <div className="bg-yellow-400 text-purple-800 px-4 py-2 md:px-6 md:py-3 rounded-full text-xs md:text-sm font-bold inline-block mb-4 md:mb-6 animate-pulse border-2 border-purple-300">
+              🎯 Expert Consultation at ₹1 Only! 🎯
             </div>
           )}
           
@@ -554,8 +571,8 @@ const Offer: React.FC = () => {
               </>
             ) : isSpecialPrice ? (
               <>
-                Digital Success<br />
-                <span className="text-yellow-300">This Diwali</span>
+                Digital Growth<br />
+                <span className="text-yellow-300">Made Affordable</span>
               </>
             ) : (
               <>
@@ -565,19 +582,19 @@ const Offer: React.FC = () => {
             )}
           </h1>
           
-          <p className="text-lg md:text-xl lg:text-2xl mb-6 md:mb-8 text-orange-100 max-w-4xl mx-auto font-medium">
+          <p className="text-lg md:text-xl lg:text-2xl mb-6 md:mb-8 text-purple-100 max-w-4xl mx-auto font-medium">
             {offerExpired ? (
-              "Diwali offer period has ended. Contact us for current pricing!"
+              "Special offer period has ended. Contact us for current pricing!"
             ) : isSpecialPrice ? (
               isFlashSale ? 
-                "Google Business at ₹1 + 90% FLASH SALE on All Services!" :
-                "Complete Digital Solution Package - Google Business at ₹1 + 10% OFF!"
+                "Expert Consultation at ₹1 + 20% FLASH SALE on All Services!" :
+                "Complete Digital Solution Package - Expert Consultation at ₹1 + 10% OFF!"
             ) : (
               "Special offer period has ended. Contact us for current pricing!"
             )}
           </p>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 md:gap-3 mb-6 md:mb-8 max-w-6xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-2 md:gap-3 mb-6 md:mb-8 max-w-6xl mx-auto">
             {servicesList.map((service, index) => (
               <div key={service.key} className={`${priceData[service.key].gradient} text-white p-2 md:p-3 rounded-xl transform hover:scale-105 transition-all duration-300 shadow-lg border-2 border-white/30 text-center`}>
                 <div className="text-lg md:text-xl mb-1">{priceData[service.key].icon}</div>
@@ -585,14 +602,14 @@ const Offer: React.FC = () => {
                   ₹{getServicePrice(service.key).toLocaleString()}
                 </div>
                 <div className="text-xs font-medium">{service.label}</div>
-                {!offerExpired && isSpecialPrice && service.key !== 'google' && !isFlashSale && (
+                {!offerExpired && isSpecialPrice && !['consultation', 'google'].includes(service.key) && !isFlashSale && (
                   <div className="text-[10px] bg-white/20 rounded px-1 mt-1">
                     Advance: ₹{getDiscountedPrice(service.key).toLocaleString()}
                   </div>
                 )}
-                {!offerExpired && isFlashSale && service.key !== 'google' && (
-                  <div className="text-[10px] bg-red-500/80 rounded px-1 mt-1 text-white">
-                    90% OFF!
+                {!offerExpired && isFlashSale && !['consultation', 'google'].includes(service.key) && (
+                  <div className="text-[10px] bg-purple-500/80 rounded px-1 mt-1 text-white">
+                    20% OFF!
                   </div>
                 )}
                 {offerExpired && (
@@ -605,7 +622,7 @@ const Offer: React.FC = () => {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
-            <button onClick={scrollToOffer} className="bg-yellow-400 hover:bg-yellow-500 text-orange-900 px-6 md:px-8 py-3 md:py-4 rounded-xl text-base md:text-lg font-bold transition-all hover:scale-105 hover:shadow-xl flex items-center gap-2 shadow-lg justify-center">
+            <button onClick={scrollToOffer} className="bg-yellow-400 hover:bg-yellow-500 text-purple-900 px-6 md:px-8 py-3 md:py-4 rounded-xl text-base md:text-lg font-bold transition-all hover:scale-105 hover:shadow-xl flex items-center gap-2 shadow-lg justify-center">
               <Rocket className="h-4 w-4 md:h-5 md:w-5" />
               {offerExpired ? 'View Services' : 'View All Services'}
             </button>
@@ -620,16 +637,16 @@ const Offer: React.FC = () => {
       {/* Special Offer Banner */}
       {!offerExpired && (
         <section className="py-4 md:py-6 bg-gradient-to-r from-green-600 to-emerald-600 text-white relative overflow-hidden">
-          <DiwaliSparkles />
+          <SparklesEffect />
           <div className="max-w-7xl mx-auto px-4 text-center">
             <div className="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-4">
               <div className="flex items-center gap-2 md:gap-3">
                 <Gift className="h-5 w-5 md:h-6 md:w-6 text-yellow-300 animate-pulse" />
-                <span className="text-lg md:text-xl font-bold">Google Business at Just ₹1!</span>
+                <span className="text-lg md:text-xl font-bold">Expert Consultation at Just ₹1!</span>
               </div>
               <div className="flex items-center gap-2 text-sm md:text-base">
                 <Sparkles className="h-4 w-4 md:h-5 md:w-5 text-yellow-300" />
-                <span>{isFlashSale ? '+ 90% FLASH SALE on All Services!' : '+ 10% EXTRA OFF on All Services'}</span>
+                <span>{isFlashSale ? '+ 20% FLASH SALE on All Services!' : '+ 10% EXTRA OFF on All Services'}</span>
               </div>
             </div>
           </div>
@@ -637,33 +654,39 @@ const Offer: React.FC = () => {
       )}
 
       {/* Services Section */}
-      <section id="offers" className="py-12 md:py-20 bg-gradient-to-br from-gray-50 to-orange-50">
+      <section id="offers" className="py-12 md:py-20 bg-gradient-to-br from-gray-50 to-blue-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-8 md:mb-16">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
               {offerExpired ? (
-                <>Our <span className="text-orange-500">Services</span></>
+                <>Our <span className="text-blue-500">Services</span></>
               ) : (
-                <>🪔 Diwali <span className="text-orange-500">Special</span> Services 🪔</>
+                <>🎯 Special <span className="text-blue-500">Offer</span> Services 🎯</>
               )}
             </h2>
             <p className="text-lg md:text-xl text-gray-600">
-              {offerExpired ? "Professional digital services for your business growth" : "Light up your business with our premium digital services"}
+              {offerExpired ? "Professional digital services for your business growth" : "Transform your business with our premium digital services"}
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto">
             {servicesList.map((service) => (
-              <div key={service.key} className={`bg-white border-2 ${offerExpired ? 'border-gray-300' : 'border-orange-200'} rounded-2xl p-4 md:p-6 relative overflow-hidden transform hover:scale-105 transition-all duration-500 shadow-xl hover:shadow-2xl`}>
-                {!offerExpired && service.key === 'google' && isSpecialPrice && (
-                  <div className="absolute -top-2 -right-2 bg-red-500 text-white px-3 md:px-4 py-1 md:py-2 rounded-full text-xs md:text-sm font-bold rotate-12 shadow-lg z-10 animate-pulse">
-                    🪔 Special
+              <div key={service.key} className={`bg-white border-2 ${offerExpired ? 'border-gray-300' : 'border-blue-200'} rounded-2xl p-4 md:p-6 relative overflow-hidden transform hover:scale-105 transition-all duration-500 shadow-xl hover:shadow-2xl`}>
+                {!offerExpired && service.key === 'consultation' && isSpecialPrice && (
+                  <div className="absolute -top-2 -right-2 bg-purple-500 text-white px-3 md:px-4 py-1 md:py-2 rounded-full text-xs md:text-sm font-bold rotate-12 shadow-lg z-10 animate-pulse">
+                    🎯 Special
                   </div>
                 )}
                 
-                {!offerExpired && isFlashSale && service.key !== 'google' && (
-                  <div className="absolute -top-2 -left-2 bg-red-500 text-white px-3 md:px-4 py-1 md:py-2 rounded-full text-xs md:text-sm font-bold rotate-12 shadow-lg z-10 animate-pulse">
-                    ⚡ 90% OFF
+                {!offerExpired && service.key === 'google' && isSpecialPrice && (
+                  <div className="absolute -top-2 -right-2 bg-yellow-500 text-white px-3 md:px-4 py-1 md:py-2 rounded-full text-xs md:text-sm font-bold rotate-12 shadow-lg z-10 animate-pulse">
+                    🔥 Hot Deal
+                  </div>
+                )}
+                
+                {!offerExpired && isFlashSale && !['consultation', 'google'].includes(service.key) && (
+                  <div className="absolute -top-2 -left-2 bg-purple-500 text-white px-3 md:px-4 py-1 md:py-2 rounded-full text-xs md:text-sm font-bold rotate-12 shadow-lg z-10 animate-pulse">
+                    ⚡ 20% OFF
                   </div>
                 )}
 
@@ -682,19 +705,19 @@ const Offer: React.FC = () => {
                     <div className="text-gray-500 line-through text-sm md:text-base">₹{priceData[service.key].regular.toLocaleString()}</div>
                   )}
                   
-                  {!offerExpired && isSpecialPrice && service.key !== 'google' && !isFlashSale && (
+                  {!offerExpired && isSpecialPrice && !['consultation', 'google'].includes(service.key) && !isFlashSale && (
                     <div className="mt-2 p-2 bg-green-500/10 rounded-lg">
-                      <div className="text-green-700 font-bold text-xs md:text-sm">Diwali Advance:</div>
+                      <div className="text-green-700 font-bold text-xs md:text-sm">Advance Booking:</div>
                       <div className="text-green-600 font-bold text-lg md:text-xl">₹{getDiscountedPrice(service.key).toLocaleString()}</div>
                       <div className="text-green-500 text-xs">Save 10% Extra!</div>
                     </div>
                   )}
 
-                  {!offerExpired && isFlashSale && service.key !== 'google' && (
-                    <div className="mt-2 p-2 bg-red-500/10 rounded-lg border border-red-200">
-                      <div className="text-red-700 font-bold text-xs md:text-sm">FLASH SALE:</div>
-                      <div className="text-red-600 font-bold text-lg md:text-xl">₹{getServicePrice(service.key).toLocaleString()}</div>
-                      <div className="text-red-500 text-xs">Save 90%!</div>
+                  {!offerExpired && isFlashSale && !['consultation', 'google'].includes(service.key) && (
+                    <div className="mt-2 p-2 bg-purple-500/10 rounded-lg border border-purple-200">
+                      <div className="text-purple-700 font-bold text-xs md:text-sm">FLASH SALE:</div>
+                      <div className="text-purple-600 font-bold text-lg md:text-xl">₹{getServicePrice(service.key).toLocaleString()}</div>
+                      <div className="text-purple-500 text-xs">Save 20%!</div>
                     </div>
                   )}
                 </div>
@@ -714,31 +737,35 @@ const Offer: React.FC = () => {
                     className={`w-full py-2 md:py-3 rounded-xl font-bold transition-all hover:scale-105 text-center block text-sm md:text-base ${
                       offerExpired 
                         ? 'bg-blue-500 hover:bg-blue-600 text-white border-2 border-blue-300' 
-                        : service.key === 'google' 
-                          ? 'bg-gradient-to-r from-yellow-500 to-amber-500 hover:from-yellow-600 hover:to-amber-600 text-white border-2 border-yellow-300' 
-                          : isFlashSale
-                            ? 'bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white border-2 border-red-300'
-                            : isSpecialPrice 
-                              ? 'bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white border-2 border-green-300' 
-                              : 'bg-gray-500 hover:bg-gray-600 text-white'
+                        : service.key === 'consultation' 
+                          ? 'bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white border-2 border-purple-300' 
+                          : service.key === 'google'
+                            ? 'bg-gradient-to-r from-yellow-500 to-amber-500 hover:from-yellow-600 hover:to-amber-600 text-white border-2 border-yellow-300'
+                            : isFlashSale
+                              ? 'bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white border-2 border-purple-300'
+                              : isSpecialPrice 
+                                ? 'bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white border-2 border-green-300' 
+                                : 'bg-gray-500 hover:bg-gray-600 text-white'
                     }`}
                   >
                     {offerExpired 
                       ? '💳 Book Now' 
-                      : service.key === 'google' 
-                        ? '🪔 Get for ₹1 Now!' 
-                        : isFlashSale
-                          ? '⚡ Grab 90% OFF Now!'
-                          : isSpecialPrice 
-                            ? '💳 Book Now - Save 10%' 
-                            : '📞 Contact for Price'
+                      : service.key === 'consultation' 
+                        ? '🎯 Get Consultation for ₹1!' 
+                        : service.key === 'google'
+                          ? '🔥 Get for ₹999 Now!'
+                          : isFlashSale
+                            ? '⚡ Grab 20% OFF Now!'
+                            : isSpecialPrice 
+                              ? '💳 Book Now - Save 10%' 
+                              : '📞 Contact for Price'
                     }
                   </button>
                   <button 
                     onClick={() => openQuickForm(priceData[service.key].name)} 
                     className="w-full py-2 rounded-xl font-bold transition-all hover:scale-105 text-center block bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white text-xs md:text-sm border-2 border-blue-300"
                   >
-                    💬 {offerExpired ? 'Get Quote' : 'Free Consultation'}
+                    💬 {offerExpired ? 'Get Quote' : 'Free Inquiry'}
                   </button>
                 </div>
               </div>
@@ -748,7 +775,7 @@ const Offer: React.FC = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-12 md:py-16 bg-gradient-to-br from-orange-500 to-red-500 text-white text-center">
+      <section className="py-12 md:py-16 bg-gradient-to-br from-blue-500 to-purple-500 text-white text-center">
         <div className="max-w-4xl mx-auto px-4">
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">
             {offerExpired ? 'Ready to Grow Your Business?' : 'Ready to Transform Your Business?'}
@@ -758,18 +785,18 @@ const Offer: React.FC = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
             <button 
-              onClick={() => window.open('https://wa.me/919341436937', '_blank')}
+              onClick={() => window.open(`https://wa.me/91${WHATSAPP_NUMBER}`, '_blank')}
               className="bg-green-500 hover:bg-green-600 text-white px-6 md:px-8 py-3 rounded-xl font-bold transition-all hover:scale-105 flex items-center gap-2 justify-center"
             >
               <MessageCircle className="h-4 w-4 md:h-5 md:w-5" />
               WhatsApp Now
             </button>
             <button 
-              onClick={() => window.open('tel:+919341436937', '_blank')}
+              onClick={() => window.open(`tel:+91${WHATSAPP_NUMBER}`, '_blank')}
               className="bg-blue-500 hover:bg-blue-600 text-white px-6 md:px-8 py-3 rounded-xl font-bold transition-all hover:scale-105 flex items-center gap-2 justify-center"
             >
               <Phone className="h-4 w-4 md:h-5 md:w-5" />
-              Call: +91 93414 36937
+              Call: +91 {WHATSAPP_NUMBER}
             </button>
             <button 
               onClick={() => setIsFormOpen(true)}
@@ -787,7 +814,7 @@ const Offer: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             <div>
-              <h3 className="text-lg md:text-xl font-bold mb-3 md:mb-4 text-orange-400">DiziGrow</h3>
+              <h3 className="text-lg md:text-xl font-bold mb-3 md:mb-4 text-blue-400">DiziGrow</h3>
               <p className="text-gray-400 text-sm md:text-base">
                 Your trusted partner for digital growth and online success.
               </p>
@@ -798,7 +825,7 @@ const Offer: React.FC = () => {
               <div className="space-y-2 text-sm md:text-base text-gray-400">
                 <div className="flex items-center gap-2">
                   <Phone className="h-4 w-4" />
-                  <span>+91 93414 36937</span>
+                  <span>+91 {WHATSAPP_NUMBER}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Mail className="h-4 w-4" />
@@ -815,13 +842,13 @@ const Offer: React.FC = () => {
               <h4 className="text-base md:text-lg font-bold mb-3 md:mb-4">Connect With Us</h4>
               <div className="flex gap-3">
                 <button 
-                  onClick={() => window.open('https://wa.me/919341436937', '_blank')}
+                  onClick={() => window.open(`https://wa.me/91${WHATSAPP_NUMBER}`, '_blank')}
                   className="bg-green-500 hover:bg-green-600 p-2 rounded-lg transition-colors"
                 >
                   <MessageCircle className="h-4 w-4 md:h-5 md:w-5" />
                 </button>
                 <button 
-                  onClick={() => window.open('tel:+919341436937', '_blank')}
+                  onClick={() => window.open(`tel:+91${WHATSAPP_NUMBER}`, '_blank')}
                   className="bg-blue-500 hover:bg-blue-600 p-2 rounded-lg transition-colors"
                 >
                   <Phone className="h-4 w-4 md:h-5 md:w-5" />
@@ -832,7 +859,7 @@ const Offer: React.FC = () => {
           
           <div className="border-t border-gray-700 mt-6 md:mt-8 pt-6 md:pt-8 text-center">
             <p className="text-gray-400 text-sm md:text-base">
-              © 2024 DiziGrow. All rights reserved. | {offerExpired ? 'Professional Services' : 'Diwali Special Offer'}
+              © 2024 DiziGrow. All rights reserved. | {offerExpired ? 'Professional Services' : 'Special Offer'}
             </p>
           </div>
         </div>
@@ -841,14 +868,14 @@ const Offer: React.FC = () => {
       {/* Payment Modal */}
       {isPaymentOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl p-4 md:p-6 max-w-md w-full shadow-2xl border-2 border-orange-300">
+          <div className="bg-white rounded-2xl p-4 md:p-6 max-w-md w-full shadow-2xl border-2 border-purple-300">
             <div className="flex justify-between items-center mb-4">
               <div>
                 <h3 className="text-xl md:text-2xl font-bold text-gray-900 flex items-center gap-2">
-                  <CreditCard className="h-5 w-5 md:h-6 md:w-6 text-orange-500" />
-                  {offerExpired ? 'Book Service' : isGoogleService ? 'Diwali Special ₹1' : isFlashSale ? 'Flash Sale 90% OFF' : 'Diwali Advance Booking'}
+                  <CreditCard className="h-5 w-5 md:h-6 md:w-6 text-purple-500" />
+                  {offerExpired ? 'Book Service' : isGoogleService ? 'Special ₹999' : paymentService.includes('Consultation') ? 'Consultation ₹1' : isFlashSale ? 'Flash Sale 20% OFF' : 'Advance Booking'}
                 </h3>
-                <p className="text-orange-600 font-semibold text-xs md:text-sm mt-1">{paymentService}</p>
+                <p className="text-purple-600 font-semibold text-xs md:text-sm mt-1">{paymentService}</p>
               </div>
               <button onClick={() => setIsPaymentOpen(false)} className="text-gray-500 hover:text-gray-700 p-1 hover:bg-gray-100 rounded-full">
                 <X className="h-5 w-5 md:h-6 md:w-6" />
@@ -859,43 +886,51 @@ const Offer: React.FC = () => {
               <div className={`p-3 md:p-4 rounded-xl border-2 ${
                 offerExpired 
                   ? 'bg-blue-50 border-blue-200' 
-                  : isGoogleService 
-                    ? 'bg-yellow-50 border-yellow-200' 
-                    : isFlashSale
-                      ? 'bg-red-50 border-red-200'
-                      : 'bg-green-50 border-green-200'
+                  : paymentService.includes('Consultation')
+                    ? 'bg-purple-50 border-purple-200' 
+                    : isGoogleService 
+                      ? 'bg-yellow-50 border-yellow-200' 
+                      : isFlashSale
+                        ? 'bg-purple-50 border-purple-200'
+                        : 'bg-green-50 border-green-200'
               }`}>
                 <div className="text-center">
                   <div className={`text-2xl md:text-3xl font-bold mb-2 ${
                     offerExpired 
                       ? 'text-blue-600' 
-                      : isGoogleService 
-                        ? 'text-yellow-600' 
-                        : isFlashSale 
-                          ? 'text-red-600' 
-                          : 'text-green-600'
+                      : paymentService.includes('Consultation')
+                        ? 'text-purple-600' 
+                        : isGoogleService 
+                          ? 'text-yellow-600' 
+                          : isFlashSale 
+                            ? 'text-purple-600' 
+                            : 'text-green-600'
                   }`}>
                     ₹{paymentAmount.toLocaleString()}
                   </div>
                   <div className={`font-semibold text-sm md:text-base ${
                     offerExpired 
                       ? 'text-blue-700' 
-                      : isGoogleService 
-                        ? 'text-yellow-700' 
-                        : isFlashSale 
-                          ? 'text-red-700' 
-                          : 'text-green-700'
+                      : paymentService.includes('Consultation')
+                        ? 'text-purple-700' 
+                        : isGoogleService 
+                          ? 'text-yellow-700' 
+                          : isFlashSale 
+                            ? 'text-purple-700' 
+                            : 'text-green-700'
                   }`}>
                     {offerExpired 
                       ? 'Service Price' 
-                      : isGoogleService 
-                        ? 'Diwali Special Price!' 
-                        : isFlashSale 
-                          ? 'Flash Sale 90% OFF!' 
-                          : 'After 10% Diwali Discount'
+                      : paymentService.includes('Consultation')
+                        ? 'Special Consultation Price!' 
+                        : isGoogleService 
+                          ? 'Special Price!' 
+                          : isFlashSale 
+                            ? 'Flash Sale 20% OFF!' 
+                            : 'After 10% Advance Discount'
                     }
                   </div>
-                  {!offerExpired && !isGoogleService && (
+                  {!offerExpired && !paymentService.includes('Consultation') && !isGoogleService && (
                     <div className="text-gray-500 text-xs md:text-sm line-through mt-1">
                       Original: ₹{originalAmount.toLocaleString()}
                     </div>
@@ -908,10 +943,12 @@ const Offer: React.FC = () => {
                 className={`w-full py-3 md:py-4 rounded-xl font-bold transition-all hover:scale-105 flex items-center justify-center gap-2 md:gap-3 text-base md:text-lg shadow-lg ${
                   offerExpired 
                     ? 'bg-blue-500 hover:bg-blue-600 text-white border-2 border-blue-300' 
+                    : paymentService.includes('Consultation')
+                      ? 'bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white border-2 border-purple-300' 
                     : isGoogleService 
                       ? 'bg-gradient-to-r from-yellow-500 to-amber-500 hover:from-yellow-600 hover:to-amber-600 text-white border-2 border-yellow-300' 
                       : isFlashSale
-                        ? 'bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white border-2 border-red-300'
+                        ? 'bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white border-2 border-purple-300'
                         : 'bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white border-2 border-green-300'
                 }`}
               >
@@ -924,7 +961,7 @@ const Offer: React.FC = () => {
 
               <button 
                 onClick={() => {setIsPaymentOpen(false); setIsFormOpen(true);}}
-                className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white py-2 md:py-3 rounded-xl font-bold transition-all hover:scale-105 text-center block border-2 border-purple-300 text-sm md:text-base"
+                className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white py-2 md:py-3 rounded-xl font-bold transition-all hover:scale-105 text-center block border-2 border-blue-300 text-sm md:text-base"
               >
                 💬 Contact First Instead
               </button>
@@ -1026,13 +1063,13 @@ const Offer: React.FC = () => {
       {/* Contact Form Modal */}
       {isFormOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl p-4 md:p-6 max-w-md w-full shadow-2xl border-2 border-orange-300">
+          <div className="bg-white rounded-2xl p-4 md:p-6 max-w-md w-full shadow-2xl border-2 border-purple-300">
             <div className="flex justify-between items-center mb-4">
               <div>
                 <h3 className="text-xl md:text-2xl font-bold text-gray-900">
-                  {offerExpired ? '📞 Contact Us' : '🪔 Diwali Offer Application'}
+                  {offerExpired ? '📞 Contact Us' : '🎯 Special Offer Application'}
                 </h3>
-                {selectedService && <p className="text-orange-600 font-semibold text-xs md:text-sm mt-1">{selectedService}</p>}
+                {selectedService && <p className="text-purple-600 font-semibold text-xs md:text-sm mt-1">{selectedService}</p>}
               </div>
               <button onClick={() => setIsFormOpen(false)} className="text-gray-500 hover:text-gray-700 p-1 hover:bg-gray-100 rounded-full">
                 <X className="h-5 w-5 md:h-6 md:w-6" />
@@ -1048,7 +1085,7 @@ const Offer: React.FC = () => {
                   required 
                   value={formData.name} 
                   onChange={handleInputChange} 
-                  className="w-full px-3 md:px-4 py-2 md:py-3 border border-orange-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm md:text-base" 
+                  className="w-full px-3 md:px-4 py-2 md:py-3 border border-purple-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm md:text-base" 
                   placeholder="Enter your full name" 
                 />
               </div>
@@ -1060,7 +1097,7 @@ const Offer: React.FC = () => {
                   required 
                   value={formData.email} 
                   onChange={handleInputChange} 
-                  className="w-full px-3 md:px-4 py-2 md:py-3 border border-orange-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm md:text-base" 
+                  className="w-full px-3 md:px-4 py-2 md:py-3 border border-purple-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm md:text-base" 
                   placeholder="Enter your email" 
                 />
               </div>
@@ -1072,7 +1109,7 @@ const Offer: React.FC = () => {
                   required 
                   value={formData.phone} 
                   onChange={handleInputChange} 
-                  className="w-full px-3 md:px-4 py-2 md:py-3 border border-orange-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm md:text-base" 
+                  className="w-full px-3 md:px-4 py-2 md:py-3 border border-purple-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm md:text-base" 
                   placeholder="Enter your WhatsApp number" 
                 />
               </div>
@@ -1083,7 +1120,7 @@ const Offer: React.FC = () => {
                   required 
                   value={formData.service} 
                   onChange={handleInputChange} 
-                  className="w-full px-3 md:px-4 py-2 md:py-3 border border-orange-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm md:text-base"
+                  className="w-full px-3 md:px-4 py-2 md:py-3 border border-purple-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm md:text-base"
                 >
                   <option value="">Select your service</option>
                   {servicesList.map(service => (
@@ -1100,16 +1137,16 @@ const Offer: React.FC = () => {
                   rows={3} 
                   value={formData.message} 
                   onChange={handleInputChange} 
-                  className="w-full px-3 md:px-4 py-2 md:py-3 border border-orange-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm md:text-base" 
+                  className="w-full px-3 md:px-4 py-2 md:py-3 border border-purple-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm md:text-base" 
                   placeholder="Tell us about your requirements..." 
                 />
               </div>
               <button 
                 type="submit" 
-                className="w-full py-3 md:py-4 rounded-xl font-bold transition-all hover:scale-105 flex items-center justify-center gap-2 md:gap-3 text-base md:text-lg shadow-lg bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white border-2 border-orange-300"
+                className="w-full py-3 md:py-4 rounded-xl font-bold transition-all hover:scale-105 flex items-center justify-center gap-2 md:gap-3 text-base md:text-lg shadow-lg bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white border-2 border-purple-300"
               >
                 <Send className="h-4 w-4 md:h-5 md:w-5" />
-                {offerExpired ? 'Send Inquiry' : 'Send Diwali Offer Request'}
+                {offerExpired ? 'Send Inquiry' : 'Send Special Offer Request'}
               </button>
             </form>
           </div>

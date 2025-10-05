@@ -15,28 +15,28 @@ const About: React.FC = () => {
       name: "Harshit Chaudhary",
       role: "CEO & Founder",
       description: "Digital marketing expert with 3+ years experience in SEO, web development & performance marketing. Founded DiziGrow to make digital growth accessible for all businesses.",
-      image: "https://imag.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80",
+      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80",
       color: "from-purple-600 to-purple-800"
     },
     {
       name: "Praveen Gupta",
       role: "Operations Manager",
       description: "Strategic planner ensuring smooth execution of all digital marketing campaigns and client satisfaction. Manages project timelines and team coordination.",
-      image: "https://ima.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80",
       color: "from-yellow-500 to-yellow-600"
     },
     {
       name: "Vikash Singh",
       role: "IT & Social Media Head",
       description: "Handles IT infrastructure & social media marketing strategies to expand digital footprints. Expert in platform management and technical implementations.",
-      image: "https://imag.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80",
+      image: "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80",
       color: "from-green-500 to-green-600"
     },
     {
       name: "Rahul Kumar",
       role: "Graphics Design Head",
       description: "Leads creative team delivering stunning branding & visual designs that engage audiences. Specializes in brand identity and marketing collateral.",
-      image: "https://imas.unsplash.com/photo-1480429370139-e0132c086e2a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80",
+      image: "https://images.unsplash.com/photo-1480429370139-e0132c086e2a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80",
       color: "from-red-500 to-red-600"
     }
   ];
@@ -77,14 +77,17 @@ const About: React.FC = () => {
     },
   ];
 
-  // Services with pricing
+  // Services with updated pricing and advance payment options
   const services = [
     {
       icon: "🔍",
       title: "SEO Services",
       description: "Get Page 1 Google rankings with our comprehensive SEO strategies and monthly optimization",
-      price: "₹8,999/month",
-      features: ["Keyword Research", "On-Page SEO", "Technical SEO", "Monthly Reports"],
+      price: "₹7,999/month",
+      originalPrice: "₹14,999",
+      advancePrice: "₹7,599",
+      advanceOriginalPrice: "₹7,999",
+      features: ["Keyword Research", "On-Page SEO", "Technical SEO", "Monthly Reports", "Rank Tracking", "Content Optimization"],
       delay: "0s"
     },
     {
@@ -92,23 +95,32 @@ const About: React.FC = () => {
       title: "Social Media Marketing",
       description: "Complete social media management with 15 creative posts + 2 viral videos monthly",
       price: "₹4,999/month",
-      features: ["Content Creation", "Platform Management", "Performance Analytics", "Strategy Planning"],
+      originalPrice: "₹12,999",
+      advancePrice: "₹4,749",
+      advanceOriginalPrice: "₹4,999",
+      features: ["Content Creation", "Platform Management", "Performance Analytics", "Strategy Planning", "Hashtag Research", "Engagement Management"],
       delay: "0.1s"
     },
     {
       icon: "💻",
       title: "Website Development",
       description: "Professional responsive websites that convert visitors to customers with modern design",
-      price: "₹17,999",
-      features: ["Responsive Design", "SEO Optimized", "Fast Loading", "Mobile Friendly"],
+      price: "₹9,999",
+      originalPrice: "₹22,000",
+      advancePrice: "₹9,499",
+      advanceOriginalPrice: "₹9,999",
+      features: ["WordPress/Shopify", "SEO Optimized", "Fast Loading", "Mobile Friendly", "Contact Forms", "1 Year Hosting"],
       delay: "0.2s"
     },
     {
       icon: "🛒",
-      title: "E-commerce Solutions",
+      title: "E-commerce Marketing",
       description: "Complete Amazon, Flipkart, Meesho store setup & management with product listing",
       price: "₹5,999",
-      features: ["Store Setup", "Product Listing", "Inventory Management", "Sales Optimization"],
+      originalPrice: "₹12,999",
+      advancePrice: "₹5,699",
+      advanceOriginalPrice: "₹5,999",
+      features: ["Store Setup", "Product Listing", "Multi-platform", "Sales Optimization", "Inventory Management", "Order Processing"],
       delay: "0.3s"
     }
   ];
@@ -218,69 +230,113 @@ const About: React.FC = () => {
     }
   ];
 
+// Payment handler function
+const handlePayment = async (service: any, isAdvancePayment: boolean = false) => {
+  // Amount calculation
+  const amount = isAdvancePayment
+    ? parseInt(service.advancePrice?.replace(/[^0-9]/g, ''))
+    : parseInt(service.price?.replace(/[^0-9]/g, ''));
+
+  // Use service.name instead of service.title
+  const description = isAdvancePayment
+    ? `${service.name} - Advance Payment (5% OFF)`
+    : service.name;
+
+  try {
+    // ✅ Razorpay Key from env (Vite)
+    const RAZORPAY_KEY_ID = import.meta.env.VITE_RAZORPAY_KEY_ID || "rzp_test_YOUR_KEY_ID";
+
+    // ✅ Razorpay options
+    const options = {
+      key: RAZORPAY_KEY_ID,
+      amount: amount * 100, // Amount in paise
+      currency: "INR",
+      name: "DiziGrow",
+      description: description,
+      image: "https://dizigrow.com/logo.png",
+      handler: function (response: any) {
+        alert(`Payment successful! Payment ID: ${response.razorpay_payment_id}`);
+        // Redirect to success page
+        window.location.href = `/payment-success?payment_id=${response.razorpay_payment_id}&service=${encodeURIComponent(service.name)}`;
+      },
+      prefill: {
+        name: "Customer Name",
+        email: "customer@example.com",
+        contact: "+919876543210"
+      },
+      notes: {
+        service: service.name,
+        type: isAdvancePayment ? "advance" : "regular"
+      },
+      theme: {
+        color: "#8B5CF6"
+      }
+    };
+
+    // ✅ Open Razorpay checkout
+    const razorpay = new (window as any).Razorpay(options);
+    razorpay.open();
+  } catch (error) {
+    console.error("Payment error:", error);
+    alert("Payment failed. Please try again or contact us on WhatsApp.");
+  }
+};
+
+
+  // WhatsApp redirect for consultation
+  const handleWhatsAppRedirect = (service: any) => {
+    const message = `Hello DiziGrow! I'm interested in ${service.title} service. Please provide more details.`;
+    window.open(`https://wa.me/919521281509?text=${encodeURIComponent(message)}`, '_blank');
+  };
+
   return (
     <div className="min-h-screen bg-white">
-<Helmet>
-  {/* TITLE: Optimized for length and keyword focus */}
-  <title>About DiziGrow | Leading SEO & Web Development Agency in Jaipur</title>
-
-  {/* DESCRIPTION: Compelling, benefit-driven, and includes key data */}
-  <meta
-    name="description"
-    content="Meet DiziGrow: Jaipur's trusted digital marketing partner. With 150+ clients and 300+ projects, we drive growth with expert SEO (from ₹8,999/mo), web development (₹17,999), and branding. 3+ years of proven experience."
-  />
-
-  {/* KEYWORDS: Refined and more focused */}
-  <meta
-    name="keywords"
-    content="about DiziGrow, digital marketing agency Jaipur, SEO company Jaipur, web development Jaipur, social media marketing, e-commerce website, affordable SEO services, branding agency"
-  />
-
-  {/* CANONICAL: CRITICAL FIX - Points to the correct URL */}
-  <link rel="canonical" href="https://dizigrow.com/about" />
-
-  {/* STRUCTURED DATA: Corrected and improved */}
-  <script type="application/ld+json">
-    {JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "DiziGrow",
-      "url": "https://dizigrow.com", // Homepage URL, not the about page
-      "logo": "https://dizigrow.com/logo.png",
-      "description": "A leading digital marketing agency in Jaipur specializing in SEO, Website Development, and Social Media Marketing.",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Jaipur",
-        "addressRegion": "Rajasthan",
-        "addressCountry": "IN" // Use ISO 3166-1 alpha-2 country code
-      },
-      "areaServed": "India", // Explicitly state the area you serve
-      "founder": {
-        "@type": "Person",
-        "name": "Harshit Chaudhary"
-      },
-      "employee": [
-        // Example structure - ensure `teamMembers` is defined in scope
-        {
-          "@type": "Person",
-          "name": "Harshit Chaudhary",
-          "jobTitle": "Founder & SEO Lead"
-        }
-        // ... other team members from your `teamMembers` array
-      ],
-      "sameAs": [
-        // Links to your social profiles
-        "https://www.linkedin.com/company/109423940",
-        "https://www.instagram.com/dizi_grow/",
-        "https://www.facebook.com/profile.php?id=61581763886467#"
-      ]
-    })}
-  </script>
-</Helmet>
+      <Helmet>
+        <title>About DiziGrow | Leading SEO & Web Development Agency in Jaipur</title>
+        <meta
+          name="description"
+          content="Meet DiziGrow: Jaipur's trusted digital marketing partner. With 150+ clients and 300+ projects, we drive growth with expert SEO (from ₹8,999/mo), web development (₹17,999), and branding. 3+ years of proven experience."
+        />
+        <meta
+          name="keywords"
+          content="about DiziGrow, digital marketing agency Jaipur, SEO company Jaipur, web development Jaipur, social media marketing, e-commerce website, affordable SEO services, branding agency"
+        />
+        <link rel="canonical" href="https://dizigrow.com/about" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "DiziGrow",
+            "url": "https://dizigrow.com",
+            "logo": "https://dizigrow.com/logo.png",
+            "description": "A leading digital marketing agency in Jaipur specializing in SEO, Website Development, and Social Media Marketing.",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Jaipur",
+              "addressRegion": "Rajasthan",
+              "addressCountry": "IN"
+            },
+            "areaServed": "India",
+            "founder": {
+              "@type": "Person",
+              "name": "Harshit Chaudhary"
+            },
+            "employee": teamMembers.map(member => ({
+              "@type": "Person",
+              "name": member.name,
+              "jobTitle": member.role
+            })),
+            "sameAs": [
+              "https://www.linkedin.com/company/109423940",
+              "https://www.instagram.com/dizi_grow/",
+              "https://www.facebook.com/profile.php?id=61581763886467#"
+            ]
+          })}
+        </script>
+      </Helmet>
 
       {/* === HERO SECTION === */}
       <section className="relative bg-gradient-to-br from-purple-900 via-purple-800 to-purple-600 text-white py-20 md:py-28 overflow-hidden">
-        {/* Animated Background Elements */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-10 left-10 w-20 h-20 bg-yellow-400 rounded-full blur-xl animate-pulse"></div>
           <div className="absolute top-1/2 right-20 w-16 h-16 bg-green-400 rounded-full blur-xl animate-bounce"></div>
@@ -508,7 +564,49 @@ const About: React.FC = () => {
                     </div>
                   ))}
                 </div>
-                <div className="text-purple-600 font-bold text-lg border-t pt-4">{service.price}</div>
+                
+                {/* Pricing Section */}
+                <div className="border-t pt-4 space-y-3">
+                  <div className="text-center">
+                    <div className="text-purple-600 font-bold text-lg">{service.price}</div>
+                    <div className="text-gray-500 text-sm line-through">{service.originalPrice}</div>
+                  </div>
+                  
+                  {/* Pay in Advance Option */}
+                  <div className="bg-green-50 border border-green-200 rounded-lg p-3">
+                    <div className="text-center mb-2">
+                      <div className="text-green-700 font-bold text-sm">Pay in Advance</div>
+                      <div className="text-green-600 font-bold">{service.advancePrice}</div>
+                      <div className="text-green-500 text-xs line-through">{service.advanceOriginalPrice}</div>
+                      <div className="text-green-600 text-xs font-semibold">Save 5%</div>
+                    </div>
+                    <button
+                      onClick={() => handlePayment(service, true)}
+                      className="w-full bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg text-sm font-semibold transition-all duration-300 hover:scale-105 flex items-center justify-center space-x-1"
+                    >
+                      <span>💳</span>
+                      <span>Pay Advance & Save 5%</span>
+                    </button>
+                  </div>
+
+                  {/* Regular Payment Option */}
+                  <button
+                    onClick={() => handlePayment(service, false)}
+                    className="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg text-sm font-semibold transition-all duration-300 hover:scale-105 flex items-center justify-center space-x-1"
+                  >
+                    <span>💰</span>
+                    <span>Pay Regular Price</span>
+                  </button>
+
+                  {/* WhatsApp Consultation */}
+                  <button
+                    onClick={() => handleWhatsAppRedirect(service)}
+                    className="w-full bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg text-sm font-semibold transition-all duration-300 hover:scale-105 flex items-center justify-center space-x-1"
+                  >
+                    <span>💚</span>
+                    <span>WhatsApp for Details</span>
+                  </button>
+                </div>
               </div>
             ))}
           </div>

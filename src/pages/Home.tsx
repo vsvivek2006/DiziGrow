@@ -9,36 +9,40 @@ const Home = () => {
   // High Quality Hero Slides without images - using pure gradients
   const heroSlides = [
     {
-      title: "Grow Your Business",
-      subtitle: "Digitally with DiziGrow",
-      description: "Professional Digital Marketing Agency offering SEO, Social Media Management, Website Development & E-commerce Solutions at Unbeatable Prices. Get Page 1 Google Rankings & 300% More Sales!",
-      badge: "🚀 50-70% OFF on All Digital Marketing Services",
-      bgGradient: "from-purple-900 via-purple-800 to-purple-600",
-      cta: "Get Free Digital Marketing Audit"
-    },
-    {
-      title: "Social Media Management",
+      title: "Social Media Marketing",
       subtitle: "Only ₹4,999/month",
-      description: "Professional Social Media Marketing with 15 Creative Posts + 2 Viral Videos. Boost Engagement, Increase Followers & Drive Sales on Instagram, Facebook, Twitter & WhatsApp.",
-      badge: "🔥 72% OFF Social Media Marketing",
+      originalPrice: "₹12,999",
+      description: "Professional Social Media Management - 15 Creative Posts + 2 Viral Videos. Boost Engagement, Increase Followers & Drive Sales on Instagram, Facebook, Twitter & WhatsApp.",
+      badge: "🔥 62% OFF Social Media Marketing",
       bgGradient: "from-blue-900 via-blue-800 to-purple-700",
       cta: "Start Social Media Marketing"
     },
     {
       title: "SEO Services Agency",
-      subtitle: "₹8,999/month - Rank #1 on Google",
+      subtitle: "₹7,999/month - Rank #1 on Google",
+      originalPrice: "₹14,999",
       description: "Professional SEO Company offering Complete Search Engine Optimization. Keyword Research, On-Page SEO, Technical SEO & Local SEO to Dominate Google Search Results.",
-      badge: "📈 64% OFF SEO Services",
+      badge: "📈 47% OFF SEO Services",
       bgGradient: "from-green-900 via-green-800 to-blue-700",
       cta: "Get SEO Quote"
     },
     {
-      title: "Website Development Company",
-      subtitle: "Starting at ₹17,999",
-      description: "Professional Web Development Agency creating Fast, Responsive & SEO-Friendly Websites. E-commerce Stores, WordPress Sites & Custom Web Applications for Business Growth.",
-      badge: "💫 50% OFF Website Development",
+      title: "Website Development",
+      subtitle: "Starting at ₹9,999",
+      originalPrice: "₹22,000",
+      description: "Professional Web Development creating Fast, Responsive & SEO-Friendly Websites. E-commerce Stores, WordPress Sites & Custom Web Applications for Business Growth.",
+      badge: "💫 55% OFF Website Development",
       bgGradient: "from-orange-900 via-orange-800 to-red-700",
       cta: "Get Website Quote"
+    },
+    {
+      title: "E-commerce Marketing",
+      subtitle: "Complete Package ₹5,999",
+      originalPrice: "₹12,999",
+      description: "Complete E-commerce Account Setup - We create and optimize your Amazon, Flipkart, Meesho accounts with professional product listing & sales optimization.",
+      badge: "🚀 54% OFF E-commerce Services",
+      bgGradient: "from-purple-900 via-purple-800 to-purple-600",
+      cta: "Start E-commerce"
     }
   ];
 
@@ -49,23 +53,23 @@ const Home = () => {
       title: "Social Media Marketing",
       description: "Complete Social Media Management - 15 Creative Posts + 2 Viral Videos/Reels with trending hashtags & content strategy",
       price: "₹4,999/month",
-      originalPrice: "₹18,000",
+      originalPrice: "₹12,999",
       platforms: ["Instagram Marketing", "Facebook Ads", "Twitter Marketing", "WhatsApp Business"],
       link: "/services",
       popular: true,
-      badge: "72% OFF",
+      badge: "62% OFF",
       keywords: ["social media marketing", "instagram management", "facebook ads"]
     },
     {
       icon: "🔍", 
       title: "SEO Services Company",
       description: "Professional Search Engine Optimization - Rank #1 on Google with comprehensive SEO strategy & monthly reporting",
-      price: "₹8,999/month",
-      originalPrice: "₹25,000",
+      price: "₹7,999/month",
+      originalPrice: "₹14,999",
       platforms: ["Google Ranking", "Keyword Research", "On-Page SEO", "Local SEO"],
       link: "/services",
       popular: false,
-      badge: "64% OFF",
+      badge: "47% OFF",
       keywords: ["seo services", "google ranking", "search engine optimization"]
     },
     {
@@ -84,12 +88,12 @@ const Home = () => {
       icon: "💻",
       title: "Website Development Agency",
       description: "Professional Web Design & Development - Responsive, SEO-friendly websites that convert visitors into customers",
-      price: "₹17,999",
-      originalPrice: "₹35,999", 
+      price: "₹9,999",
+      originalPrice: "₹22,000", 
       platforms: ["Website Design", "Web Development", "Shopify Store", "WordPress"],
       link: "/services",
       popular: true,
-      badge: "50% OFF",
+      badge: "55% OFF",
       keywords: ["website development", "web design", "responsive website"]
     }
   ];
@@ -100,6 +104,7 @@ const Home = () => {
       icon: "📝",
       title: "Social Media Setup",
       price: "₹1,999",
+      originalPrice: "₹4,999",
       description: "Professional Social Media Account Creation",
       keywords: ["social media setup", "profile creation"]
     },
@@ -107,6 +112,7 @@ const Home = () => {
       icon: "🗺️",
       title: "Google Business Profile",
       price: "₹999", 
+      originalPrice: "₹2,999",
       description: "Google My Business Optimization",
       keywords: ["google business", "local seo"]
     },
@@ -114,20 +120,23 @@ const Home = () => {
       icon: "💬",
       title: "WhatsApp Business API",
       price: "₹999",
+      originalPrice: "₹2,499",
       description: "Business WhatsApp Marketing Setup",
       keywords: ["whatsapp business", "chat marketing"]
     },
     {
       icon: "🎥",
       title: "YouTube Channel SEO",
-      price: "₹999",
+      price: "₹9,999",
+      originalPrice: "₹19,999",
       description: "YouTube SEO & Channel Optimization",
       keywords: ["youtube seo", "video marketing"]
     },
     {
       icon: "🎨",
       title: "Logo Design Service",
-      price: "₹2,999",
+      price: "₹799",
+      originalPrice: "₹2,999",
       description: "Professional Logo & Brand Identity",
       keywords: ["logo design", "brand identity"]
     },
@@ -135,6 +144,7 @@ const Home = () => {
       icon: "📧",
       title: "Email Marketing",
       price: "₹4,999", 
+      originalPrice: "₹9,999",
       description: "Email Campaign Setup & Management",
       keywords: ["email marketing", "campaign management"]
     }
@@ -240,32 +250,32 @@ const Home = () => {
   const pricingPlans = [
     {
       name: "Startup Marketing Package",
-      price: "₹19,999",
-      originalPrice: "₹33,000",
+      price: "₹29,999",
+      originalPrice: "₹67,497",
       description: "Perfect for startups beginning their digital marketing journey",
       features: ["Basic Social Media", "Website SEO", "Google Business Setup", "3 Months Support"],
       popular: false,
-      badge: "Save ₹13,001",
+      badge: "Save ₹37,498",
       keywords: ["startup marketing", "basic package"]
     },
     {
       name: "Growth Marketing Package",
-      price: "₹39,999",
-      originalPrice: "₹67,000",
+      price: "₹49,999",
+      originalPrice: "₹1,20,000",
       description: "Ideal for growing businesses ready to scale with digital marketing",
       features: ["Complete Digital Marketing", "Advanced SEO", "Social Media Ads", "6 Months Support"],
       popular: true,
-      badge: "Save ₹27,001",
+      badge: "Save ₹70,001",
       keywords: ["growth marketing", "complete package"]
     },
     {
       name: "Enterprise Marketing Package",
-      price: "₹69,999",
-      originalPrice: "₹1,20,000",
+      price: "₹79,999",
+      originalPrice: "₹1,80,000",
       description: "Complete digital marketing transformation for established businesses",
       features: ["Premium Digital Marketing", "Custom Strategy", "Multi-platform Ads", "12 Months Support"],
       popular: false,
-      badge: "Save ₹50,001",
+      badge: "Save ₹1,00,001",
       keywords: ["enterprise marketing", "premium package"]
     }
   ];
@@ -412,6 +422,9 @@ const Home = () => {
                   <span className="block text-yellow-400 mt-2 md:mt-4 text-2xl md:text-4xl lg:text-5xl">
                     {slide.subtitle}
                   </span>
+                  <span className="block text-white/70 text-xl md:text-2xl mt-2 line-through">
+                    {slide.originalPrice}
+                  </span>
                 </h1>
                 
                 <p className={`text-base md:text-xl mb-6 md:mb-8 max-w-4xl mx-auto text-white/90 leading-relaxed transform transition-all duration-700 delay-300 ${
@@ -552,6 +565,7 @@ const Home = () => {
                 <div className="text-xl md:text-2xl mb-1 md:mb-2 group-hover:scale-110 transition-transform">{service.icon}</div>
                 <h3 className="font-semibold text-gray-900 text-xs md:text-sm mb-1">{service.title}</h3>
                 <div className="text-purple-600 font-bold text-base md:text-lg mb-1">{service.price}</div>
+                <div className="text-gray-400 text-xs line-through mb-1">{service.originalPrice}</div>
                 <p className="text-gray-600 text-xs">{service.description}</p>
               </div>
             ))}

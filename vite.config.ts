@@ -9,10 +9,10 @@ export default defineConfig({
   },
   build: {
     outDir: 'dist',
-    sourcemap: false, // Disable sourcemaps for smaller build size
-    chunkSizeWarningLimit: 1000, // Increase limit to avoid warnings
+    sourcemap: false,
+    chunkSizeWarningLimit: 1000,
     rollupOptions: {
-      external: [], // ✅ Ensure nothing is externalized
+      external: [],
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom'],
@@ -23,20 +23,17 @@ export default defineConfig({
   },
   server: {
     port: 5173,
-    host: true // Allow external access if needed
+    host: true
   },
   preview: {
     port: 5173,
     host: true
   },
-  // ✅ ADD THESE FOR VERCEL + PAYMENT GATEWAY
   define: {
-    'process.env': process.env, // ✅ Pass environment variables properly
-    global: 'globalThis' // ✅ Fix global object for Razorpay
+    'process.env': process.env,
+    global: 'globalThis'
   },
   resolve: {
-    alias: {
-      // ✅ Add any necessary aliases
-    }
+    alias: {}
   }
 });
