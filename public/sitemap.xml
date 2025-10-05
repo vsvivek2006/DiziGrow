@@ -25,6 +25,13 @@
     <changefreq>daily</changefreq>
   </url>
 
+<url>
+    <loc>https://dizigrow.com/offer</loc>
+    <lastmod>2025-09-28</lastmod>
+    <priority>0.8</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
   <!-- Pricing -->
   <url>
     <loc>https://dizigrow.com/pricing</loc>
