@@ -1,5 +1,7 @@
 // src/pages/Offer.tsx
 import React, { useState, useEffect } from "react";
+// Temporary fix - Direct key use
+const RAZORPAY_KEY_ID = 'rzp_live_ROjWHHKbSiP7Al'; // ✅ Direct key
 import { Helmet } from "react-helmet";
 import { 
   Check, 
@@ -68,7 +70,6 @@ const Offer: React.FC = () => {
   const [isGoogleService, setIsGoogleService] = useState(false);
 
   // Razorpay Keys
-  const RAZORPAY_KEY_ID = import.meta.env.VITE_RAZORPAY_KEY_ID || 'rzp_live_ROjWHHKbSiP7Al';
   
   // Initialize timers from localStorage
   useEffect(() => {
