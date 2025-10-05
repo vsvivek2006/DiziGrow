@@ -1,7 +1,5 @@
 // src/pages/Offer.tsx
 import React, { useState, useEffect } from "react";
-// Temporary fix - Direct key use
-
 import { Helmet } from "react-helmet";
 import { 
   Check, 
@@ -69,8 +67,9 @@ const Offer: React.FC = () => {
   const [originalAmount, setOriginalAmount] = useState(0);
   const [isGoogleService, setIsGoogleService] = useState(false);
 
-  // Razorpay Keys
-  const RAZORPAY_KEY_ID = 'rzp_live_ROjWHHKbSiP7Al'; // ✅ Direct key
+  // ✅ FIXED: Environment variable use karo
+  const RAZORPAY_KEY_ID = import.meta.env.VITE_RAZORPAY_KEY_ID;
+
   // Initialize timers from localStorage
   useEffect(() => {
     const savedTime = localStorage.getItem('diwaliOfferTime');
@@ -359,7 +358,8 @@ const Offer: React.FC = () => {
       }
 
       const options = {
-        key: RAZORPAY_KEY_ID,
+        // ✅ FIXED: Environment variable directly use karo
+        key: import.meta.env.VITE_RAZORPAY_KEY_ID,
         amount: paymentAmount * 100,
         currency: 'INR',
         name: 'DiziGrow - Diwali Special',
