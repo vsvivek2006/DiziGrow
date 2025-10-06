@@ -16,7 +16,7 @@ import Privacy from './pages/Privacy';
 import FAQ from './FAQ';
 import NotFound from './pages/NotFound';
 import Offer from './pages/Offer';
-
+import GrowthServices from './pages/GrowthServices';
 function App() {
   return (
     <Router>
@@ -51,8 +51,9 @@ function App() {
             <Route path="/terms" element={<Terms />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/faq" element={<FAQ />} />
+            <Route path="/growth-services" element={<GrowthServices />} />
             
-            <Route path="/offer" element={<Offer />} />
+            <Route path="/Offer" element={<Offer />} />
             
             {/* ✅ PAYMENT SUCCESS PAGE */}
             <Route path="/payment/success" element={

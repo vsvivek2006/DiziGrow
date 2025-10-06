@@ -99,9 +99,11 @@ const Footer: React.FC = () => {
                 { name: "Home", path: "/" },
                 { name: "About", path: "/about" },
                 { name: "Services", path: "/services" },
+                { name: "Growth Services", path: "/growth-services" }, // ✅ YEH ADD KIYA
                 { name: "Portfolio", path: "/portfolio" },
                 { name: "Pricing", path: "/pricing" },
                 { name: "Contact", path: "/contact" },
+                { name: "Offer", path: "/offer" },
                 { name: "FAQ", path: "/faq" }
               ].map((item) => (
                 <li key={item.name}>
