@@ -98,7 +98,7 @@ const GrowthServices: React.FC = () => {
     {
       id: "ig-views",
       name: "Instagram Reels Views",
-      price: 0.50, // Doubled from 0.25
+      price: 10, // Doubled from 0.25
       min: 100,
       max: 1000000,
       description: "High-quality Instagram Reel views with fast delivery",
@@ -109,7 +109,7 @@ const GrowthServices: React.FC = () => {
     {
       id: "ig-likes",
       name: "Instagram Likes",
-      price: 111.72, // Doubled from 55.86
+      price: 200, // Doubled from 55.86
       min: 100,
       max: 50000,
       description: "Premium Instagram likes from real accounts",
@@ -120,7 +120,7 @@ const GrowthServices: React.FC = () => {
     {
       id: "ig-post-views",
       name: "Instagram Post Views",
-      price: 5.92, // Doubled from 2.96
+      price: 10, // Doubled from 2.96
       min: 100,
       max: 100000,
       description: "Boost your post visibility with genuine views",
@@ -142,7 +142,7 @@ const GrowthServices: React.FC = () => {
     {
       id: "ig-likes-indian",
       name: "Instagram Likes ~ Indian",
-      price: 414.14, // Doubled from 207.07
+      price: 500, // Doubled from 207.07
       min: 100,
       max: 50000,
       description: "Indian targeted likes for better engagement",
@@ -153,7 +153,7 @@ const GrowthServices: React.FC = () => {
     {
       id: "ig-story-views",
       name: "Instagram Story Views",
-      price: 26.72, // Doubled from 13.36
+      price: 50, // Doubled from 13.36
       min: 100,
       max: 100000,
       description: "Increase your story reach with genuine views",
@@ -164,7 +164,7 @@ const GrowthServices: React.FC = () => {
     {
       id: "ig-shares",
       name: "Instagram Shares",
-      price: 5.94, // Doubled from 2.97
+      price: 10, // Doubled from 2.97
       min: 100,
       max: 50000,
       description: "Boost your content sharing",
@@ -175,7 +175,7 @@ const GrowthServices: React.FC = () => {
     {
       id: "ig-reach",
       name: "Instagram Reach + Impression",
-      price: 13.30, // Doubled from 6.65
+      price: 30, // Doubled from 6.65
       min: 100,
       max: 100000,
       description: "Increase your post reach and impressions",
@@ -186,7 +186,7 @@ const GrowthServices: React.FC = () => {
     {
       id: "ig-comments",
       name: "Instagram Comments",
-      price: 242.12, // Doubled from 121.06
+      price: 300, // Doubled from 121.06
       min: 10,
       max: 1000,
       description: "Genuine comments on your posts",
@@ -234,7 +234,7 @@ const GrowthServices: React.FC = () => {
     {
       id: "fb-followers",
       name: "Facebook All Type Followers",
-      price: 212.08, // Doubled from 106.04
+      price: 300, // Doubled from 106.04
       min: 100,
       max: 10000,
       description: "Genuine Facebook followers for all page types",
@@ -245,7 +245,7 @@ const GrowthServices: React.FC = () => {
     {
       id: "fb-likes",
       name: "Facebook Likes",
-      price: 70.08, // Doubled from 35.04
+      price: 100, // Doubled from 35.04
       min: 100,
       max: 50000,
       description: "Increase your Facebook page likes",
@@ -256,7 +256,7 @@ const GrowthServices: React.FC = () => {
     {
       id: "fb-post-reaction",
       name: "Facebook Post Reaction",
-      price: 85.22, // Doubled from 42.61
+      price: 150, // Doubled from 42.61
       min: 100,
       max: 50000,
       description: "Get genuine reactions on your Facebook posts",
@@ -267,7 +267,7 @@ const GrowthServices: React.FC = () => {
     {
       id: "fb-story-reaction",
       name: "Facebook Story Reaction",
-      price: 134.94, // Doubled from 67.47
+      price: 200, // Doubled from 67.47
       min: 100,
       max: 100000,
       description: "Boost your Facebook story engagement",
@@ -278,7 +278,7 @@ const GrowthServices: React.FC = () => {
     {
       id: "fb-page-likes",
       name: "Facebook Page Likes & Followers",
-      price: 127.84, // Doubled from 63.92
+      price: 300, // Doubled from 63.92
       min: 100,
       max: 10000,
       description: "Grow your Facebook page audience",
