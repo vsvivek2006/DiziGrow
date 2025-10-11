@@ -206,15 +206,18 @@ const Footer: React.FC = () => {
 
         {/* Bottom Section */}
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
-          <p 
-            className="text-gray-300 text-lg mb-2"
-            style={{ fontFamily: '"Haboro Serif", serif' }}
-          >
-            © {year} DiziGrow. All rights reserved.
-          </p>
-          <p className="text-gray-400 text-md">
-            Made with ❤️ in India | Empowering Businesses Digitally
-          </p>
+<p
+  className="text-gray-300 text-lg mb-2"
+  style={{ fontFamily: '"Haboro Serif", serif' }}
+>
+  © {year} DiziGrow. All rights reserved.
+</p>
+<p className="text-gray-400 text-md">
+  Made with ❤️ in India | Empowering Businesses Digitally <br />
+  <span className="text-gray-400">
+    Website designed & maintained by <strong>Vivek Singh</strong>
+  </span>
+</p>
           
           {/* Trust Badges */}
           <div className="flex justify-center items-center gap-6 mt-4 pt-4 border-t border-gray-800">
